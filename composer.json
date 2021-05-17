@@ -1,0 +1,40 @@
+{
+    "name": "circli/serverless-core",
+    "description": "",
+    "type": "circli-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Sundqvist",
+            "email": "andreas@oak-valley.se"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.0",
+        "circli/core": "3.x-dev",
+        "circli/web-core-common": "dev-master",
+        "nyholm/psr7": "^1.2",
+        "php-di/php-di": "^6.0",
+        "psr/container": "^1.0",
+        "psr/http-message": "^1.0",
+        "psr/http-server-middleware": "^1.0",
+        "polus/adr-bref": "dev-master",
+        "polus/middleware-dispatcher": "^2.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "phpstan/phpstan": "^0.12.49"
+    },
+    "autoload": {
+        "psr-4": {
+            "Circli\\ServerlessCore\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
