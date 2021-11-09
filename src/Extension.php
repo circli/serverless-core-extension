@@ -25,6 +25,7 @@ use Psr\Http\Server\MiddlewareInterface;
 class Extension implements ExtensionInterface
 {
     public const SERVERLESS_DISPATCHER = 'core.serverless.dispatcher';
+    public const SERVERLESS_MIDDLEWARES = 'serverless.middlewares';
 
     /**
      * @return array<string, mixed>
@@ -65,9 +66,15 @@ class Extension implements ExtensionInterface
                     $container->get(EventDispatcherInterface::class)
                 ));
 
-                if ($container->has('middlewares')) {
-                    /** @var MiddlewareContainer $middlewareContainer */
-                    $middlewareContainer = $container->get('middlewares');
+                if ($container->has(self::SERVERLESS_MIDDLEWARES) || $container->has('middlewares')) {
+                    if ($container->has(self::SERVERLESS_MIDDLEWARES)) {
+                        /** @var MiddlewareContainer $middlewareContainer */
+                        $middlewareContainer = $container->get(self::SERVERLESS_MIDDLEWARES);
+                    }
+                    else {
+                        /** @var MiddlewareContainer $middlewareContainer */
+                        $middlewareContainer = $container->get('middlewares');
+                    }
                     if (count($middlewareContainer)) {
                         $middlewares = iterator_to_array($middlewareContainer);
                         return new MiddlewareDispatcher(
