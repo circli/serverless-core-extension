@@ -48,7 +48,7 @@ class Extension implements ExtensionInterface
             Resolver::class => static function (ContainerInterface $container) {
                 return new ActionResolver($container);
             },
-            self::SERVERLESS_DISPATCHER => static function (ContainerInterface $container) {
+            Extension::SERVERLESS_DISPATCHER => static function (ContainerInterface $container) {
                 $resolver = $container->get(Resolver::class);
                 $defaultDispatcher = HandlerActionDispatcher::default(
                     $resolver,
@@ -66,10 +66,10 @@ class Extension implements ExtensionInterface
                     $container->get(EventDispatcherInterface::class)
                 ));
 
-                if ($container->has(self::SERVERLESS_MIDDLEWARES) || $container->has('middlewares')) {
-                    if ($container->has(self::SERVERLESS_MIDDLEWARES)) {
+                if ($container->has(Extension::SERVERLESS_MIDDLEWARES) || $container->has('middlewares')) {
+                    if ($container->has(Extension::SERVERLESS_MIDDLEWARES)) {
                         /** @var MiddlewareContainer $middlewareContainer */
-                        $middlewareContainer = $container->get(self::SERVERLESS_MIDDLEWARES);
+                        $middlewareContainer = $container->get(Extension::SERVERLESS_MIDDLEWARES);
                     }
                     else {
                         /** @var MiddlewareContainer $middlewareContainer */
