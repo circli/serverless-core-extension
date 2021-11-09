@@ -24,6 +24,8 @@ use Psr\Http\Server\MiddlewareInterface;
 
 class Extension implements ExtensionInterface
 {
+    public const SERVERLESS_DISPATCHER = 'core.serverless.dispatcher';
+
     /**
      * @return array<string, mixed>
      */
@@ -45,7 +47,7 @@ class Extension implements ExtensionInterface
             Resolver::class => static function (ContainerInterface $container) {
                 return new ActionResolver($container);
             },
-            ActionDispatcher::class => static function (ContainerInterface $container) {
+            self::SERVERLESS_DISPATCHER => static function (ContainerInterface $container) {
                 $resolver = $container->get(Resolver::class);
                 $defaultDispatcher = HandlerActionDispatcher::default(
                     $resolver,

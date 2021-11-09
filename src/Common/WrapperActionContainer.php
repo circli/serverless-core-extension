@@ -2,6 +2,8 @@
 
 namespace Circli\ServerlessCore\Common;
 
+use Circli\ServerlessCore\Extension;
+use Circli\ServerlessCore\Http\MiddlewareDispatcher;
 use Polus\Adr\ActionDispatcher\HandlerActionDispatcher;
 use Polus\Adr\Interfaces\Action;
 use Polus\Adr\Interfaces\ActionDispatcher;
@@ -41,7 +43,10 @@ final class WrapperActionContainer implements ContainerInterface
     private function wrapAction(Action $action): RequestHandlerInterface
     {
         if (!$this->actionDispatcher) {
-            if ($this->container->has(ActionDispatcher::class)) {
+            if ($this->container->has(Extension::SERVERLESS_DISPATCHER)) {
+                $this->actionDispatcher = $this->container->get(Extension::SERVERLESS_DISPATCHER);
+            }
+            elseif ($this->container->has(ActionDispatcher::class)) {
                 $this->actionDispatcher = $this->container->get(ActionDispatcher::class);
             }
             else {
