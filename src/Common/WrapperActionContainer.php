@@ -3,7 +3,6 @@
 namespace Circli\ServerlessCore\Common;
 
 use Circli\ServerlessCore\Extension;
-use Circli\ServerlessCore\Http\MiddlewareDispatcher;
 use Polus\Adr\ActionDispatcher\HandlerActionDispatcher;
 use Polus\Adr\Interfaces\Action;
 use Polus\Adr\Interfaces\ActionDispatcher;
