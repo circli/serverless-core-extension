@@ -11,7 +11,6 @@ use Circli\WebCore\Middleware\Container as MiddlewareContainer;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Polus\Adr\ActionDispatcher\HandlerActionDispatcher;
 use Polus\Adr\ActionHandler\EventActionHandler;
-use Polus\Adr\Interfaces\ActionDispatcher;
 use Polus\Adr\Interfaces\ExceptionHandler;
 use Polus\Adr\Interfaces\Resolver;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -30,7 +29,7 @@ class Extension implements ExtensionInterface
     /**
      * @return array<string, mixed>
      */
-    public function configure(PathContainer $paths = null): array
+    public function configure(?PathContainer $pathContainer = null): array
     {
         return [
             'adr.relay_resolver' => function (ContainerInterface $container) {
